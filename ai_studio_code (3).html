@@ -1,0 +1,925 @@
+--- START OF FILE index (6).html ---
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Red51 Technology - Tienda Online</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #7B5C7E;
+            --secondary: #1B9AA8;
+            --accent: #168B97;
+            --dark: #1a1a2e;
+            --light: #f5f5f5;
+            --white: #FFFFFF;
+            --text-dark: #1a1a1a;
+            --success: #1B9AA8;
+            --danger: #e94560;
+            --shadow: 0 2px 20px rgba(0,0,0,0.08);
+            --dark-overlay: rgba(0,0,0,0.6); /* Nuevo overlay para hero */
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: var(--light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: var(--white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            cursor: pointer;
+        }
+        
+        .logo-red {
+            color: var(--secondary);
+        }
+        
+        .logo-number {
+            color: var(--primary);
+        }
+        
+        .logo-subtitle {
+            font-size: 0.5em;
+            font-weight: 400;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-dark);
+            display: block;
+            margin-top: -8px;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .nav-btn {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .nav-btn:hover {
+            color: var(--secondary);
+        }
+        
+        .cart-btn {
+            position: relative;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(27, 154, 168, 0.3);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: var(--danger);
+            color: var(--white);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        
+        .hero {
+            background-image: url('https://zeabur.com/static/hero-f00e123659427b056157583626e5d836.webp'); /* Imagen de cabecera */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: var(--white);
+            padding: 5rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Overlay para mejorar la legibilidad del texto en el hero */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-overlay);
+            z-index: 1;
+        }
+        
+        .hero > div {
+            position: relative;
+            z-index: 2; /* Asegura que el contenido esté por encima del overlay */
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            font-weight: 800;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+        }
+        
+        .category-filter {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: var(--white);
+            border-color: var(--secondary);
+        }
+        
+        .products-section {
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-weight: 700;
+            text-align: center;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(27, 154, 168, 0.2);
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 250px;
+            background: var(--light); /* Fondo más neutro si no hay imagen */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden; /* Para que la imagen no se salga */
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Ajusta la imagen dentro del contenedor */
+            background-color: #fff; /* Fondo blanco si la imagen tiene transparencias */
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(233, 69, 96, 0.95);
+            color: var(--white);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-category {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-brand {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-description {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            line-height: 1.5;
+        }
+        
+        .product-price {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .add-to-cart-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: var(--white);
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-to-cart-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(27, 154, 168, 0.3);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            overflow-y: auto; /* Permite scroll en el modal */
+        }
+        
+        .modal-content {
+            background: var(--white);
+            max-width: 800px;
+            margin: 2rem auto;
+            border-radius: 20px;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative; /* Para el sticky header */
+        }
+        
+        .modal-header {
+            padding: 2rem;
+            border-bottom: 2px solid var(--light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            z-index: 10;
+        }
+        
+        .modal-header h2 {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+        
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+            line-height: 1;
+        }
+        
+        .modal-body {
+            padding: 2rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+        
+        .cart-item-icon {
+            font-size: 3rem;
+            flex-shrink: 0;
+            width: 80px; /* Tamaño fijo para el icono/imagen */
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .cart-item-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .cart-item-info {
+            flex-grow: 1;
+        }
+        
+        .cart-item-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+        
+        .cart-item-brand {
+            color: #999;
+            font-size: 0.85rem;
+            margin-bottom: 0.3rem;
+        }
+        
+        .cart-item-price {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 0.5rem;
+        }
+        
+        .qty-btn {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+        
+        .qty-btn:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .qty-display {
+            font-weight: 700;
+            font-size: 1.1rem;
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .remove-btn {
+            background: none;
+            border: none;
+            color: var(--danger);
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-decoration: underline;
+            margin-left: auto;
+        }
+        
+        .cart-total {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .cart-total-label {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        .cart-total-amount {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--light);
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--secondary);
+        }
+        
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        
+        .btn-primary {
+            width: 100%;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: var(--white);
+            padding: 1.2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(27, 154, 168, 0.3);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: var(--white);
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .empty-cart {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: #999;
+        }
+        
+        .empty-cart-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+        
+        .success-icon {
+            font-size: 5rem;
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+        
+        .success-message h3 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .success-message p {
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .admin-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .admin-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .products-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .products-table th,
+        .products-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light);
+        }
+        
+        .products-table th {
+            background: var(--light);
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .products-table tr:hover {
+            background: var(--light);
+        }
+        
+        .table-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+        
+        .btn-edit {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+        
+        .footer {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: var(--white);
+            text-align: center;
+            padding: 2.5rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-section {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .auth-info {
+            background: #f0f9ff;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--secondary);
+        }
+
+        /* Estilos para la subida de imagen en el modal de producto */
+        .image-upload-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1.5rem;
+            border: 2px dashed var(--light);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .image-preview {
+            width: 150px;
+            height: 150px;
+            border: 1px solid var(--light);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #f9f9f9;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+        }
+        
+        .image-preview .default-icon {
+            font-size: 3rem;
+            color: #ccc;
+        }
+
+        .image-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                gap: 0.5rem;
+                flex-wrap: wrap;
+            }
+            
+            .modal-content {
+                margin: 0;
+                border-radius: 0;
+                max-height: 100vh;
+            }
+            
+            .logo {
+                font-size: 1.5rem;
+            }
+            
+            .products-table {
+                font-size: 0.85rem;
+            }
+
+            .admin-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <div>
+                <div class="logo" onclick="mostrarTienda()">
+                    <span class="logo-red">Red</span><span class="logo-number">51</span>
+                </div>
+                <span class="logo-subtitle">TECHNOLOGY</span>
+            </div>
+            <div class="nav-links">
+                <button class="nav-btn" onclick="mostrarTienda()" id="btnTienda">Tienda</button>
+                <button class="nav-btn" onclick="mostrarAdmin()" id="btnAdmin">Admin</button>
+                <button class="cart-btn" onclick="abrirCarrito()">
+                    Carrito
+                    <span class="cart-count" id="cartCount">0</span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <div id="tiendaView">
+        <section class="hero">
+            <div>
+                <h1>Tecnologia de Vanguardia</h1>
+                <p>Los mejores productos de tecnologia y electronica con las marcas mas reconocidas del mercado</p>
+            </div>
+        </section>
+
+        <main class="container">
+            <section class="products-section">
+                <div class="category-filter" id="categoryFilter"></div>
+                <h2 class="section-title">Nuestros Productos</h2>
+                <div class="products-grid" id="productsGrid"></div>
+                <div id="loadingProducts" class="loading" style="display:none;">Cargando productos...</div>
+            </section>
+        </main>
+    </div>
+
+    <div id="adminView" style="display:none;">
+        <main class="container">
+            <div id="loginSection" class="login-section">
+                <h2 style="margin-bottom: 1rem; color: var(--primary);">Acceso Administrador</h2>
+                <div class="auth-info">
+                    <p style="color: #666; font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        Para acceder al panel de administracion, primero debes crear un usuario en tu proyecto de Supabase:
+                    </p>
+                    <ol style="color: #666; font-size: 0.9rem; margin-left: 1.5rem;">
+                        <li>Ve a tu proyecto Supabase Dashboard</li>
+                        <li>Menu: Authentication → Users</li>
+                        <li>Click "Add user" → "Create new user"</li>
+                        <li>Ingresa email y contraseña</li>
+                        <li>Confirma el email del usuario</li>
+                        <li>Vuelve aqui e inicia sesion</li>
+                    </ol>
+                </div>
+                <form id="loginForm" onsubmit="iniciarSesion(event)">
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" id="emailLogin" required placeholder="admin@red51.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" id="passwordLogin" required>
+                    </div>
+                    <button type="submit" class="btn-primary">Iniciar Sesion</button>
+                    <div id="loginError" style="margin-top: 1rem; padding: 1rem; border-radius: 8px; display: none; background: #f8d7da; color: #721c24;"></div>
+                </form>
+            </div>
+
+            <div id="adminPanel" style="display:none;">
+                <div class="admin-section">
+                    <div class="admin-header">
+                        <h2>Gestion de Productos</h2>
+                        <div style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                            <span id="adminEmail" style="color: #666; font-size: 0.9rem;"></span>
+                            <button class="btn-secondary" onclick="descargarPlantillaCSV()">Descargar Plantilla (CSV)</button>
+                            <input type="file" id="importCsvInput" accept=".csv" style="display: none;" onchange="importarProductos(event)">
+                            <button class="btn-secondary" onclick="document.getElementById('importCsvInput').click()">Importar Productos (CSV)</button>
+                            <button class="btn-secondary" onclick="exportarProductosCSV()">Exportar Productos (CSV)</button>
+                            <button class="btn-secondary" onclick="abrirModalProducto()">Agregar Producto</button>
+                            <button class="btn-danger" onclick="cerrarSesion()">Cerrar Sesion</button>
+                        </div>
+                    </div>
+                    <div style="overflow-x: auto;">
+                        <table class="products-table">
+                            <thead>
+                                <tr>
+                                    <th>Imagen / Icono</th>
+                                    <th>Nombre</th>
+                                    <th>Marca</th>
+                                    <th>Categoria</th>
+                                    <th>Precio</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminProductsTable"></tbody>
+                        </table>
+                    </div>
+                    <div id="loadingAdmin" class="loading" style="display:none;">Cargando...</div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="cartModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Tu Carrito</h2>
+                <button class="close-btn" onclick="cerrarCarrito()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cartContent"></div>
+                <div id="successMessage" class="success-message">
+                    <div class="success-icon">✓</div>
+                    <h3>Pedido Realizado con Exito</h3>
+                    <p>Hemos recibido tu pedido. Te contactaremos pronto por WhatsApp para coordinar el pago y la entrega.</p>
+                    <button class="btn-primary" onclick="cerrarYLimpiar()">Continuar Comprando</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="productoModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="productoModalTitle">Agregar Producto</h2>
+                <button class="close-btn" onclick="cerrarModalProducto()">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="productoForm" onsubmit="guardarProducto(event)">
+                    <input type="hidden" id="productoId">
+                    
+                    <div class="image-upload-area">
+                        <div class="image-preview" id="imagePreview">
+                            <span class="default-icon">📷</span>
+                        </div>
+                        <input type="file" id="productImageInput" accept="image/*" style="display: none;" onchange="previsualizarImagen(event)">
+                        <div class="image-buttons">
+                            <button type="button" class="btn-secondary" onclick="document.getElementById('productImageInput
